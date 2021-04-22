@@ -1,7 +1,5 @@
 <template>
-  <textarea v-model="text" name="" cols="30" rows="10"></textarea>
-
-  {{text}}
+  <textarea v-model="text" name="" cols="30" rows="5"></textarea>
 
   <ul>
     <li v-for="message in messages">

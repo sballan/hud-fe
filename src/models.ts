@@ -12,15 +12,24 @@ export class Ref {
   }
 }
 
+export class HudDate {
+  constructor(private date: Date) {}
+
+  static createFromString(dateString: String) {
+    return new HudDate(new Date(dateString))
+  }
+}
+
 export class Note {
   constructor(
     public id: Number,
-    public content: String
+    public content: String,
+    public createdAt: HudDate
   ) {  }
 
   static create(content: String) {
     const id = Math.trunc(Math.random() * 1000000)
-    const note = new Note(id, content);
+    const note = new Note(id, content, new HudDate(new Date()));
     NoteStore.set(id, note)
 
     return note

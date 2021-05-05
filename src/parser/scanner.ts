@@ -1,7 +1,8 @@
 abstract class Token { constructor(public str: string) { } }
 
 class NoteBodyHeader extends Token { }
-class NoteBody extends Token { }
+class NoteBodyToken extends Token { }
+class SeparatorToken extends Token { }
 
 export class Scanner {
   constructor(
@@ -14,10 +15,22 @@ export class Scanner {
     const tokens: Array<Token> = []
     let tokenStart = 0
 
-    for (let i = tokenStart + 2; i < this.input.length; i++) {
-      if (this.input[i-1] == "\n" && this.input[i] == "\n") {
-        const str = this.input.slice(tokenStart, i - 1)
-        tokens.push(new NoteBody(str))
+    for (let i = tokenStart; i < this.input.length; i++) {
+      if (this.input[tokenStart] === "\n" && this.input[tokenStart+1] === "\n") {
+        const str = this.input.slice(tokenStart, i+1)
+        tokens.push(new SeparatorToken(str))
+        tokenStart = i+1
+        continue
+      } else if (this.input[i+1] === "\n" && this.input[i+2] === "\n") {
+        const str = this.input.slice(tokenStart, i+1)
+        tokens.push(new NoteBodyToken(str))
+        tokenStart = i+1
+        continue
+      } else if (this.input[tokenStart] === '#' && this.input[i] !== '\n') {
+        continue
+      } else if (this.input[tokenStart] === '#' && this.input[i] === '\n') {
+        const str = this.input.slice(tokenStart, i+1)
+        tokens.push(new NoteBodyHeader(str))
         tokenStart = i+1
         continue
       }

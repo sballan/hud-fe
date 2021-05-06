@@ -1,8 +1,8 @@
 import { Note } from './note'
 
 const mockNoteStore = new Map<number, Note>()
-mockNoteStore.set(1, new Note(1, null, "test parent note"))
-mockNoteStore.set(2, new Note(2, 1, "test child note"))
+mockNoteStore.set(1, new Note(1, "test parent note", []))
+mockNoteStore.set(2, new Note(2, "test child note", []))
 
 export const api = {
   notes: {

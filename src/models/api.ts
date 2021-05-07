@@ -12,6 +12,15 @@ mockNoteApi.set(1, note1)
 mockNoteApi.set(2, note2)
 
 export const api = {
+  docs: {
+    async get(id: number): Promise<Doc> {
+      const mockDoc = mockDocApi.get(id)
+      return new Promise((resolve, reject) => {
+        if (mockDoc) resolve(mockDoc)
+        else reject()
+      })
+    }
+  },
   notes: {
     async get(id: number): Promise<Note> {
       const mockNote = mockNoteApi.get(id)

@@ -1,8 +1,8 @@
 import { Note } from './note'
 import { Doc } from './doc'
 
-const note1 = new Note(1, "test parent note", [])
 const note2 = new Note(2, "test child note", [])
+const note1 = new Note(1, "test parent note", [note2])
 const doc1 = new Doc(1, [note1, note2])
 
 const mockNoteApi = new Map<number, Note>()

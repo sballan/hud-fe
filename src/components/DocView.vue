@@ -4,12 +4,7 @@
 
     <ul>
       <li v-for="note in doc.notes">
-        {{note.content}}
-        <ul v-for="nestedNote in note.nested">
-           <li>
-             Nested Content: {{nestedNote.content}}
-           </li>
-        </ul>
+        <NoteComponent :note="note"></NoteComponent>
       </li>
     </ul>
   </div>
@@ -18,10 +13,13 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
+import NoteComponent from './NoteComponent.vue'
+
 import { Doc } from '../models/doc'
 
 export default defineComponent({
   name: 'DocView',
+  components: { NoteComponent },
   props: {
     doc: {
       type: Doc as PropType<Doc>,

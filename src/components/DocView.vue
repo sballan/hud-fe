@@ -5,6 +5,11 @@
     <ul>
       <li v-for="note in doc.notes">
         {{note.content}}
+        <ul v-for="nestedNote in note.nested">
+           <li>
+             Nested Content: {{nestedNote.content}}
+           </li>
+        </ul>
       </li>
     </ul>
   </div>

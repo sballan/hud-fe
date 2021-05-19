@@ -1,8 +1,12 @@
 export class Note {
   constructor(
     public id: number,
-    public parentId: number | null,
-    public content: string
-  ) {  }
+    public content: string,
+    public nested: Array<Note>
+  ) { }
+
+  reload() {
+    // makes API request, replaces necessary data
+  }
 
 }
